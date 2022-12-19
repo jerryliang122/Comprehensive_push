@@ -51,6 +51,8 @@ class wecat_token(DB):
         }
         r = requests.post(url,json.dumps(data))
         return r.json()
+    
+ 
 
         
         
