@@ -43,5 +43,15 @@ class token(Base):
         self.access_token = access_token
         self.expiration_time = expiration_time
 
+class ipset(Base):
+    __tablename__ = 'ipset'
+    id = Column(Integer, primary_key=True)
+    type = Column(Text)
+    ip = Column(Text)
+    
+    def __init__(self,id,type,ip):
+        self.id = id
+        self.type = type
+        self.ip = ip
 # 生成数据库
 db = DB().init()
