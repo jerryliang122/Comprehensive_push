@@ -4,6 +4,8 @@ from sanic.response import text
 import xml.etree.cElementTree as ET
 import json5
 from api.receive_WeChat.WXBizMsgCrypt3 import WXBizMsgCrypt
+from api.action_response import action_response
+from threading import Thread
 
 receive = Blueprint("receive", url_prefix="/receive")
 # 读取comfig.json5文件
@@ -40,4 +42,7 @@ async def receive_body(request):
     content = xml_tree.find("Content").text
     # 获取发送人
     FromUserName = xml_tree.find("FromUserName").text
+    # 使用多线程发送给后端响应装置
+    t = Thread(target=action_response, args=(content, FromUserName))
+    t.start()
     return text("success")
