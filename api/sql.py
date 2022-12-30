@@ -22,7 +22,7 @@ init_data = json.loads(open("conf/sql.json", "r", encoding="utf-8").read())
 class DB:
     def __init__(self):
         self.engine = create_engine(
-            f'mysql+pymysql://{init_data["name"]}:{init_data["password"]}@localhost:3306/comprehensive_push',
+            f'mysql+pymysql://{init_data["name"]}:{init_data["password"]}@localhost:3306/{init_data["name"]}',
             max_overflow=2,
             pool_pre_ping=True,
             pool_recycle=1600,
