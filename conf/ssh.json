@@ -1,0 +1,8 @@
+{
+    "ssh-1": {
+        "host": "",
+        "port": 22,
+        "user": "",
+        "password": ""
+    }
+}
