@@ -43,6 +43,5 @@ async def receive_body(request):
     # 获取发送人
     FromUserName = xml_tree.find("FromUserName").text
     # 使用多线程发送给后端响应装置
-    t = Thread(target=action_response, args=(content, FromUserName))
-    t.start()
+    Thread(target=action_response, args=(content, FromUserName)).start()
     return text("success")

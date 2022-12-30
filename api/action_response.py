@@ -65,7 +65,7 @@ class ipset(DB):
         if self.add_ip(type, ip) == True:
             # 回复IP已添加，无需重复添加
             self.reply(FromUserName, "IP已添加，无需重复添加")
-            return None
+            return False
         # 执行命令
         stdin, stdout, stderr = router.exec_command(f"ipset add {type} {ip}")
         # 获取命令结果
