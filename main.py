@@ -1,4 +1,4 @@
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+from threading import Thread
 
 
 def web():
@@ -9,11 +9,4 @@ def web():
 
 
 if __name__ == "__main__":
-    # 多进程
-    with ProcessPoolExecutor() as executor:
-        executor.submit(web)
-
-    # 多线程
-    # with ThreadPoolExecutor() as executor:
-    #     executor.submit(web)
-    #     executor.submit(web)
+    web()
