@@ -31,7 +31,7 @@ class DB:
 
     def init(self):
         Base.metadata.create_all(self.engine)
-        return self.db
+        return "TRUE"
 
 
 # 数据库
