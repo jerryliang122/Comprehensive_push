@@ -1,4 +1,5 @@
+# web/wechat/__init__.py
 from sanic import Blueprint
-from web.wechat import receive
+from .receive import receive
 
-api = Blueprint.group(receive, url_prefix="/wechat")
+api = Blueprint.group(receive, url_prefix="/")
