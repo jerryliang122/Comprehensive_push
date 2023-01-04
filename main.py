@@ -1,8 +1,9 @@
 from threading import Thread
 from sanic import Sanic
-from .web import web
+from web import web
 
 
 if __name__ == "__main__":
     app = Sanic("app")
     app.blueprint(web)
+    app.run(host="0.0.0.0", port=8000)
