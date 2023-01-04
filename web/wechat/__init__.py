@@ -2,4 +2,4 @@
 from sanic import Blueprint
 from .receive import receive
 
-wechat = Blueprint.group(receive, url_prefix="/")
+wechat = Blueprint.group(receive, url_prefix="/wechat")
