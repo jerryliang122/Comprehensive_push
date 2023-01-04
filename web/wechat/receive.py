@@ -7,7 +7,7 @@ from api.receive_WeChat.WXBizMsgCrypt3 import WXBizMsgCrypt
 from api.action_response import judge
 from threading import Thread
 
-receive = Blueprint("receive", url_prefix="/receive")
+receive = Blueprint("receive", url_prefix="/")
 # 读取comfig.json5文件
 sToken = json5.load(open("conf/wechat.json"))["sToken"]
 sEncodingAESKey = json5.load(open("conf/wechat.json"))["sEncodingAESKey"]
