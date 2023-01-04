@@ -1,12 +1,8 @@
 from threading import Thread
-
-
-def web():
-    # 接入入口文件
-    from web.app import main
-
-    main()
+from sanic import Sanic
+from .web import web
 
 
 if __name__ == "__main__":
-    web()
+    app = Sanic("app")
+    app.blueprint(web)
