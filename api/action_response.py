@@ -24,8 +24,6 @@ class ipset(DB):
     # 添加ip进入数据库
     def add_ip(self, type, ip):
         try:
-            if self.query_ip(type, ip) == True:
-                return False
             self.session.add(ipset(type, ip))
             self.session.commit()
             return True
@@ -62,13 +60,29 @@ class ipset(DB):
             password=self.config["ssh-1"]["password"],
         )
         # 写入数据库
-        if self.add_ip(type, ip) == True:
-            # 回复IP已添加，无需重复添加
-            self.reply(FromUserName, "IP已添加，无需重复添加")
-            return False
+        self.add_ip(type, ip)
         # 执行命令
         stdin, stdout, stderr = router.exec_command(f"ipset add {type} {ip}")
         # 获取命令结果
         result = stdout.read().decode()
         # 关闭连接
         router.close()
+
+
+# 判断发来的话
+def judge(text, FromUserName):
+    if text == "ipset":
+        # 实例化ipset
+        models = ipset()
+        # 查询数据库
+        query = models.query_ip(text.split(" ")[2], text.split(" ")[1])
+        # 判断是否存在
+        if query == True:
+            # 回复IP已添加，无需重复添加
+            models.reply(FromUserName, "IP已添加，无需重复添加")
+            return False
+        # 添加IP
+        models.add_ip_to_router(text.split(" ")[2], text.split(" ")[1], FromUserName)
+        # 回复添加成功
+        models.reply(FromUserName, "添加成功")
+        return True
