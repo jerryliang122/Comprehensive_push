@@ -7,7 +7,7 @@ from api.receive_WeChat.WXBizMsgCrypt3 import WXBizMsgCrypt
 from api.action_response import judge
 from threading import Thread
 
-receive = Blueprint("receive", url_prefix="/receive")
+receive = Blueprint("receive", url_prefix="/")
 # 读取comfig.json5文件
 sToken = json5.load(open("conf/wechat.json"))["sToken"]
 sEncodingAESKey = json5.load(open("conf/wechat.json"))["sEncodingAESKey"]
@@ -25,7 +25,7 @@ async def receive_Verification(request):
     echostr = request.args.get("echostr")
     # 进入验证环节
     ret, sEchoStr = wxcpt.VerifyURL(msg_signature, timestamp, nonce, echostr)
-    return text(sEchoStr)
+    return text(sEchoStr.decode("utf-8"))
 
 
 @receive.post("/receive")

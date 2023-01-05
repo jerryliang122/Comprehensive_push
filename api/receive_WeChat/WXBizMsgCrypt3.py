@@ -16,7 +16,7 @@ from Crypto.Cipher import AES
 import xml.etree.cElementTree as ET
 import socket
 
-import api.receive_WeChat.ierror
+import api.receive_WeChat.ierror as ierror
 
 
 """
