@@ -25,7 +25,7 @@ async def receive_Verification(request):
     echostr = request.args.get("echostr")
     # 进入验证环节
     ret, sEchoStr = wxcpt.VerifyURL(msg_signature, timestamp, nonce, echostr)
-    return text(sEchoStr)
+    return text(sEchoStr.decode("utf-8"))
 
 
 @receive.post("/receive")
