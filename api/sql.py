@@ -21,13 +21,7 @@ init_data = json.loads(open("conf/sql.json", "r", encoding="utf-8").read())
 # 连接数据库
 class DB:
     def __init__(self):
-        self.engine = create_engine(
-            f'mysql+pymysql://{init_data["name"]}:{init_data["password"]}@localhost:3306/{init_data["name"]}',
-            max_overflow=2,
-            pool_pre_ping=True,
-            pool_recycle=1600,
-            pool_use_lifo=True,
-        )
+        self.engine = create_engine(f"sqlite:///conf/data.db", echo=True)
 
     def init(self):
         Base.metadata.create_all(self.engine)
