@@ -11,10 +11,12 @@ jobs:
         uses: actions/checkout@main
         with:
           fetch-depth: 0
+        
       - name: Set up Python
         uses: actions/setup-python@master
         with:
           python-version: 3.9
+      
       - name: Run unit tests
         run: |
           pip install pytest
