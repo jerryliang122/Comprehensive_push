@@ -17,7 +17,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.ext.declarative import declarative_base
 
-init_data = json.loads(open("conf/sql.json", "r", encoding="utf-8").read())
 # 连接数据库
 class DB:
     def __init__(self):

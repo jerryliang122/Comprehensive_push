@@ -9,9 +9,10 @@ from threading import Thread
 
 receive = Blueprint("receive", url_prefix="/")
 # 读取comfig.json5文件
-sToken = json5.load(open("conf/wechat.json"))["sToken"]
-sEncodingAESKey = json5.load(open("conf/wechat.json"))["sEncodingAESKey"]
-sCorpID = json5.load(open("conf/wechat.json"))["wecom_cid"]
+configs = json5.load(open("conf/wechat.json", encoding="utf-8"))
+sToken = configs["sToken"]
+sEncodingAESKey = configs["sEncodingAESKey"]
+sCorpID = configs["wecom_cid"]
 # 实例化WXBizMsgCrypt3类
 wxcpt = WXBizMsgCrypt(sToken, sEncodingAESKey, sCorpID)
 
