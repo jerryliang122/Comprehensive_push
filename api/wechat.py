@@ -17,9 +17,7 @@ class wecat_token(DB):
 
     # 获取token
     def get_token(self):
-        url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={}&corpsecret={}".format(
-            self.wecom_cid, self.wecom_secre
-        )
+        url = f"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={self.wecom_cid}&corpsecret={self.wecom_secre}"
         r = requests.get(url)
         # 检查是否已经存在数据
         if self.session.query(token).filter(token.id == 1).count() == 0:
@@ -47,7 +45,7 @@ class wecat_token(DB):
     # 发送消息
     def send_msg_text(self, msg, wecom_touid):
         token = self.check_token()
-        url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={}".format(token)
+        url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={token}"
         data = {
             "touser": wecom_touid,
             "msgtype": "text",

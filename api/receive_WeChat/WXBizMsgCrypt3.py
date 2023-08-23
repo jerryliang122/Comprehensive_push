@@ -97,8 +97,7 @@ class XMLParse:
             "timestamp": timestamp,
             "nonce": nonce,
         }
-        resp_xml = self.AES_TEXT_RESPONSE_TEMPLATE % resp_dict
-        return resp_xml
+        return self.AES_TEXT_RESPONSE_TEMPLATE % resp_dict
 
 
 class PKCS7Encoder:
@@ -207,7 +206,7 @@ class WXBizMsgCrypt(object):
     # 构造函数
     def __init__(self, sToken, sEncodingAESKey, sReceiveId):
         try:
-            self.key = base64.b64decode(sEncodingAESKey + "=")
+            self.key = base64.b64decode(f"{sEncodingAESKey}=")
             assert len(self.key) == 32
         except:
             throw_exception("[error]: EncodingAESKey unvalid !", FormatException)
@@ -228,7 +227,7 @@ class WXBizMsgCrypt(object):
         ret, signature = sha1.getSHA1(self.m_sToken, sTimeStamp, sNonce, sEchoStr)
         if ret != 0:
             return ret, None
-        if not signature == sMsgSignature:
+        if signature != sMsgSignature:
             return ierror.WXBizMsgCrypt_ValidateSignature_Error, None
         pc = Prpcrypt(self.key)
         ret, sReplyEchoStr = pc.decrypt(sEchoStr, self.m_sReceiveId)
@@ -273,7 +272,7 @@ class WXBizMsgCrypt(object):
         ret, signature = sha1.getSHA1(self.m_sToken, sTimeStamp, sNonce, encrypt)
         if ret != 0:
             return ret, None
-        if not signature == sMsgSignature:
+        if signature != sMsgSignature:
             return ierror.WXBizMsgCrypt_ValidateSignature_Error, None
         pc = Prpcrypt(self.key)
         ret, xml_content = pc.decrypt(encrypt, self.m_sReceiveId)
