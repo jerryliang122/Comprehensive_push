@@ -1,9 +1,3 @@
-from threading import Thread
-from sanic import Sanic
-from web import web
-
-
-if __name__ == "__main__":
-    app = Sanic("app")
-    app.blueprint(web)
-    app.run(host="0.0.0.0", port=8000, debug=True, workers=4)
+import uvicorn
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware

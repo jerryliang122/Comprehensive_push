@@ -1,7 +1,0 @@
-{
-    "wecom_cid": "", // 企业ID
-    "wecom_secre": "", // 应用的凭证密钥
-    "wecom_aid": "", // 应用ID
-    "sEncodingAESKey": "", // 消息加解密密钥
-    "sToken": "" // 消息校验Token
-}
