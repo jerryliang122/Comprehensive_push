@@ -42,9 +42,14 @@ jobs:
 
       # 构建镜像, 并打 tag
       - name: Build docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           push: true
           context: .
+          platforms: |
+            linux/amd64
+            linux/arm64/v8
+            linux/arm32/v7
+            linux/i386
           tags: jerryliang/comprehensive_push:latest
  
