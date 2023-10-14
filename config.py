@@ -7,7 +7,8 @@ class response_status(BaseModel):
     响应状态
     """
 
-    status: int
+    code: int
+    msg: str
 
 
 class Wechatsentece(BaseModel):
